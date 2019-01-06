@@ -64,7 +64,7 @@ namespace TakeNote
         private void CreateContextMenu()
         {
             ContextMenu menu = new ContextMenu();
-            menu.MenuItems.Add("Show", MenuShow_Click);
+            menu.MenuItems.Add("Settings", MenuShow_Click);
             menu.MenuItems.Add("Close", MenuClose_Click);
 
             notifyIcon.ContextMenu = menu;

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TakeNote.Models;
+using TakeNote.Classes;
 
 namespace TakeNote
 {
@@ -25,8 +26,9 @@ namespace TakeNote
         private static readonly string CURRENT_DIRECTORY = Directory.GetCurrentDirectory();
 
         private static readonly Bitmap IMAGE_ADD_BUTTON = new Bitmap(CURRENT_DIRECTORY + "/../../Icons/Black/Add.png");
-        private static readonly Bitmap IMAGE_CLOSE_BUTTON = new Bitmap(CURRENT_DIRECTORY + "/../../Icons/Black/Close.png");
+        private static readonly Bitmap IMAGE_REMOVE_BUTTON = new Bitmap(CURRENT_DIRECTORY + "/../../Icons/Black/Remove.png");
         private static readonly Bitmap IMAGE_SETTINGS_BUTTON = new Bitmap(CURRENT_DIRECTORY + "/../../Icons/Black/Settings.png");
+        private static readonly Bitmap IMAGE_DRAG_BUTTON = new Bitmap(CURRENT_DIRECTORY + "/../../Icons/Black/Drag.png");
 
         private static readonly Size DEFAULT_BUTTON_SIZE = new Size(30, 30);
 
@@ -36,6 +38,9 @@ namespace TakeNote
         #region [ - Fields - ]
 
         public NoteDetail Detail;
+
+        private bool _draggable = false;
+        private Point _lastLocation;
 
         #endregion
 
@@ -78,6 +83,29 @@ namespace TakeNote
             pictureBox.BackColor = Color.Transparent;
         }
 
+        private void Drag_MouseDown(object sender, MouseEventArgs e)
+        {
+            _draggable = true;
+            _lastLocation = e.Location;
+        }
+
+        private void Drag_MouseUp(object sender, MouseEventArgs e)
+        {
+            _draggable = false;
+        }
+
+        private void Drag_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_draggable)
+            {
+                this.Location = new Point(
+                    (this.Location.X - _lastLocation.X) + e.X, 
+                    (this.Location.Y - _lastLocation.Y) + e.Y);
+
+                this.Update();
+            }
+        }
+
         #endregion
 
 
@@ -85,8 +113,8 @@ namespace TakeNote
 
         private void SetMainDesign()
         {
-            pBox_close.Image = IMAGE_CLOSE_BUTTON;
-            LocateButtonsX(pBox_close, 1);
+            pBox_remove.Image = IMAGE_REMOVE_BUTTON;
+            LocateButtonsX(pBox_remove, 1);
 
             pBox_settings.Image = IMAGE_SETTINGS_BUTTON;
             LocateButtonsX(pBox_settings, 2);
@@ -94,8 +122,11 @@ namespace TakeNote
             pBox_add.Image = IMAGE_ADD_BUTTON;
             LocateButtonsX(pBox_add, 3);
 
-            label_title.Location = new Point(0, 0);
-            label_title.Size = new Size(this.Width - DEFAULT_BUTTON_SIZE.Width * 3, 30);
+            pBox_drag.Image = IMAGE_DRAG_BUTTON;
+            pBox_drag.Location = new Point(0, 0);
+
+            label_title.Location = new Point(DEFAULT_BUTTON_SIZE.Width, 0);
+            label_title.Size = new Size(this.Width - DEFAULT_BUTTON_SIZE.Width * 4, 30);
         }
 
         private void LocateButtonsX(PictureBox pBox, int numberFromRight)

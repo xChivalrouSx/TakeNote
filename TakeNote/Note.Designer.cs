@@ -29,15 +29,17 @@
         private void InitializeComponent()
         {
             this.panel_main = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.pBox_add = new System.Windows.Forms.PictureBox();
-            this.pBox_close = new System.Windows.Forms.PictureBox();
+            this.pBox_remove = new System.Windows.Forms.PictureBox();
             this.pBox_settings = new System.Windows.Forms.PictureBox();
             this.label_title = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.pBox_drag = new System.Windows.Forms.PictureBox();
             this.panel_main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_add)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pBox_close)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBox_remove)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_settings)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBox_drag)).BeginInit();
             this.SuspendLayout();
             // 
             // panel_main
@@ -46,8 +48,22 @@
             this.panel_main.Controls.Add(this.textBox1);
             this.panel_main.Location = new System.Drawing.Point(0, 30);
             this.panel_main.Name = "panel_main";
+            this.panel_main.Padding = new System.Windows.Forms.Padding(5);
             this.panel_main.Size = new System.Drawing.Size(300, 300);
             this.panel_main.TabIndex = 0;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(153)))));
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.textBox1.Location = new System.Drawing.Point(5, 5);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(20);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(290, 290);
+            this.textBox1.TabIndex = 0;
             // 
             // pBox_add
             // 
@@ -61,17 +77,17 @@
             this.pBox_add.MouseEnter += new System.EventHandler(this.PictureBox_Enter);
             this.pBox_add.MouseLeave += new System.EventHandler(this.PictureBox_Leave);
             // 
-            // pBox_close
+            // pBox_remove
             // 
-            this.pBox_close.Location = new System.Drawing.Point(198, -6);
-            this.pBox_close.Name = "pBox_close";
-            this.pBox_close.Size = new System.Drawing.Size(30, 30);
-            this.pBox_close.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pBox_close.TabIndex = 1;
-            this.pBox_close.TabStop = false;
-            this.pBox_close.Click += new System.EventHandler(this.Close_Click);
-            this.pBox_close.MouseEnter += new System.EventHandler(this.PictureBox_Enter);
-            this.pBox_close.MouseLeave += new System.EventHandler(this.PictureBox_Leave);
+            this.pBox_remove.Location = new System.Drawing.Point(198, -6);
+            this.pBox_remove.Name = "pBox_remove";
+            this.pBox_remove.Size = new System.Drawing.Size(30, 30);
+            this.pBox_remove.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pBox_remove.TabIndex = 1;
+            this.pBox_remove.TabStop = false;
+            this.pBox_remove.Click += new System.EventHandler(this.Close_Click);
+            this.pBox_remove.MouseEnter += new System.EventHandler(this.PictureBox_Enter);
+            this.pBox_remove.MouseLeave += new System.EventHandler(this.PictureBox_Leave);
             // 
             // pBox_settings
             // 
@@ -94,18 +110,17 @@
             this.label_title.Text = "title_label";
             this.label_title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox1
+            // pBox_drag
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(153)))));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.textBox1.Location = new System.Drawing.Point(0, 0);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(20);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(300, 300);
-            this.textBox1.TabIndex = 0;
+            this.pBox_drag.Location = new System.Drawing.Point(0, 0);
+            this.pBox_drag.Name = "pBox_drag";
+            this.pBox_drag.Size = new System.Drawing.Size(30, 30);
+            this.pBox_drag.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pBox_drag.TabIndex = 4;
+            this.pBox_drag.TabStop = false;
+            this.pBox_drag.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Drag_MouseDown);
+            this.pBox_drag.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Drag_MouseMove);
+            this.pBox_drag.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Drag_MouseUp);
             // 
             // Note
             // 
@@ -113,9 +128,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(249)))), ((int)(((byte)(249)))), ((int)(((byte)(149)))));
             this.ClientSize = new System.Drawing.Size(300, 330);
+            this.Controls.Add(this.pBox_drag);
             this.Controls.Add(this.label_title);
             this.Controls.Add(this.pBox_settings);
-            this.Controls.Add(this.pBox_close);
+            this.Controls.Add(this.pBox_remove);
             this.Controls.Add(this.pBox_add);
             this.Controls.Add(this.panel_main);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -128,8 +144,9 @@
             this.panel_main.ResumeLayout(false);
             this.panel_main.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_add)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pBox_close)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBox_remove)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_settings)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBox_drag)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -138,10 +155,11 @@
 
         private System.Windows.Forms.Panel panel_main;
         private System.Windows.Forms.PictureBox pBox_add;
-        private System.Windows.Forms.PictureBox pBox_close;
+        private System.Windows.Forms.PictureBox pBox_remove;
         private System.Windows.Forms.PictureBox pBox_settings;
         private System.Windows.Forms.Label label_title;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.PictureBox pBox_drag;
     }
 }
 

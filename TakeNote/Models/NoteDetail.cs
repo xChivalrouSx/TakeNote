@@ -12,6 +12,7 @@ namespace TakeNote.Models
 
         public int Id { get; set; }
         public string Title { get; set; }
+        public string Content { get; set; }
 
         #endregion
 
@@ -19,9 +20,8 @@ namespace TakeNote.Models
         {
             Id = 0;
             Title = "New Note";
+            Content = "";
         }
-
-
 
     }
 }

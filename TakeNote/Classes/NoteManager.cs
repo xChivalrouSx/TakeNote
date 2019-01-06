@@ -4,15 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TakeNote
+namespace TakeNote.Classes
 {
     public static class NoteManager
     {
+
         #region [ - Fields - ]
 
         private static List<Note> notes = new List<Note>();
 
         #endregion
+
 
         #region [ - Public Methods - ]
         
@@ -44,8 +46,6 @@ namespace TakeNote
         }
 
         #endregion
-
-
 
     }
 }

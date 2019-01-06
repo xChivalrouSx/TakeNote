@@ -53,7 +53,7 @@
     <Compile Include="Note.Designer.cs">
       <DependentUpon>Note.cs</DependentUpon>
     </Compile>
-    <Compile Include="NoteManager.cs" />
+    <Compile Include="Classes\NoteManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs">
@@ -91,9 +91,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Icons\Black\Note.png" />
+    <Content Include="Icons\Black\Drag.png" />
     <Content Include="Icons\Black\Add.png" />
-    <Content Include="Icons\Black\Close.png" />
+    <Content Include="Icons\Black\Remove.png" />
     <Content Include="Icons\Black\Settings.png" />
     <Content Include="Icons\Note.ico" />
   </ItemGroup>
