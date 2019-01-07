@@ -143,6 +143,7 @@
             this.ShowInTaskbar = false;
             this.Text = "Note";
             this.Load += new System.EventHandler(this.Note_Load);
+            this.Shown += new System.EventHandler(this.Note_Shown);
             this.panel_main.ResumeLayout(false);
             this.panel_main.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_add)).EndInit();

@@ -74,6 +74,12 @@ namespace TakeNote
             NoteManager.AddNote(this);
         }
 
+        private void Note_Shown(object sender, EventArgs e)
+        {
+            textBox_content.SelectionStart = textBox_content.Text.Length;
+            textBox_content.SelectionLength = 0;
+        }
+
         private void Add_Click(object sender, EventArgs e)
         {
             Note note = new Note();
@@ -184,5 +190,6 @@ namespace TakeNote
 
         #endregion
 
+        
     }
 }
