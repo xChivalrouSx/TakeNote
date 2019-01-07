@@ -13,6 +13,8 @@ namespace TakeNote.Classes
 
         private static List<Note> notes = new List<Note>();
 
+        private static DBHelper _db = new DBHelper();
+
         #endregion
 
 
@@ -37,8 +39,10 @@ namespace TakeNote.Classes
         {
             foreach (Note n in notes)
             {
-                if (n.Detail.Id == note.Detail.Id)
+                if (n.Id == note.Id)
                 {
+                    _db.Delete(n.Id);
+
                     notes.Remove(n);
                     return;
                 }

@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TakeNote.Models;
 using TakeNote.Classes;
 
 namespace TakeNote
@@ -37,8 +36,11 @@ namespace TakeNote
 
         #region [ - Fields - ]
 
-        public NoteDetail Detail;
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
 
+        private DBHelper _db;
         private bool _draggable = false;
         private Point _lastLocation;
 
@@ -51,8 +53,11 @@ namespace TakeNote
         {
             SetMainDesign();
 
-            Detail = new NoteDetail();
-            label_title.Text = Detail.Title;
+            _db = new DBHelper();
+
+            label_title.Text = Title = "- Take Note -";
+            textBox_content.Text = Content = "";
+            Id = _db.Insert(Title, Content); ;
 
             NoteManager.AddNote(this);
         }

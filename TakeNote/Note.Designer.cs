@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.panel_main = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox_content = new System.Windows.Forms.TextBox();
             this.pBox_add = new System.Windows.Forms.PictureBox();
             this.pBox_remove = new System.Windows.Forms.PictureBox();
             this.pBox_settings = new System.Windows.Forms.PictureBox();
@@ -45,25 +45,25 @@
             // panel_main
             // 
             this.panel_main.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(153)))));
-            this.panel_main.Controls.Add(this.textBox1);
+            this.panel_main.Controls.Add(this.textBox_content);
             this.panel_main.Location = new System.Drawing.Point(0, 30);
             this.panel_main.Name = "panel_main";
             this.panel_main.Padding = new System.Windows.Forms.Padding(5);
             this.panel_main.Size = new System.Drawing.Size(300, 300);
             this.panel_main.TabIndex = 0;
             // 
-            // textBox1
+            // textBox_content
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(153)))));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.textBox1.Location = new System.Drawing.Point(5, 5);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(20);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(290, 290);
-            this.textBox1.TabIndex = 0;
+            this.textBox_content.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(153)))));
+            this.textBox_content.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox_content.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_content.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.textBox_content.Location = new System.Drawing.Point(5, 5);
+            this.textBox_content.Margin = new System.Windows.Forms.Padding(20);
+            this.textBox_content.Multiline = true;
+            this.textBox_content.Name = "textBox_content";
+            this.textBox_content.Size = new System.Drawing.Size(290, 290);
+            this.textBox_content.TabIndex = 0;
             // 
             // pBox_add
             // 
@@ -158,7 +158,7 @@
         private System.Windows.Forms.PictureBox pBox_remove;
         private System.Windows.Forms.PictureBox pBox_settings;
         private System.Windows.Forms.Label label_title;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox_content;
         private System.Windows.Forms.PictureBox pBox_drag;
     }
 }
