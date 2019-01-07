@@ -8,23 +8,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TakeNote.Classes;
 
 namespace TakeNote
 {
     public partial class Settings : Form
     {
-        public Settings()
-        {
-            InitializeComponent();
-            init();
-        }
-
 
         #region [ - Constant Fields - ]
 
         private static readonly string CURRENT_DIRECTORY = Directory.GetCurrentDirectory();
 
         private static readonly Icon NOTIFY_ICON = new Icon(CURRENT_DIRECTORY + "/../../Icons/Note.ico");
+
+        #endregion
+
+
+        #region [ - Fields - ]
+
+        DBHelper _db;
+
+        #endregion
+
+
+        #region [ - Public Methods - ]
+
+        public Settings()
+        {
+            InitializeComponent();
+            init();
+        }
 
         #endregion
 
@@ -57,8 +70,23 @@ namespace TakeNote
             CreateContextMenu();
             notifyIcon.Icon = NOTIFY_ICON;
 
-            Note note = new Note();
-            note.Show();
+            _db = new DBHelper();
+            List<Note> notes = _db.GetNotes();
+            if (notes.Count == 0)
+            {
+                Note note = new Note();
+                note.Show();
+            }
+            else
+            {
+                foreach (Note note in notes)
+                {
+                    if (note.IsVisible == 1)
+                    {
+                        note.Show();
+                    }
+                }
+            }
         }
 
         private void CreateContextMenu()

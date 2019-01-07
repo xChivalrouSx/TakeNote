@@ -110,6 +110,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Icons\Black\Close.png" />
     <Content Include="Icons\Black\Drag.png" />
     <Content Include="Icons\Black\Add.png" />
     <Content Include="Icons\Black\Remove.png" />

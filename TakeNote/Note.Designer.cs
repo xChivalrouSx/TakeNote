@@ -32,13 +32,13 @@
             this.textBox_content = new System.Windows.Forms.TextBox();
             this.pBox_add = new System.Windows.Forms.PictureBox();
             this.pBox_remove = new System.Windows.Forms.PictureBox();
-            this.pBox_settings = new System.Windows.Forms.PictureBox();
+            this.pBox_close = new System.Windows.Forms.PictureBox();
             this.label_title = new System.Windows.Forms.Label();
             this.pBox_drag = new System.Windows.Forms.PictureBox();
             this.panel_main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_add)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_remove)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pBox_settings)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBox_close)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_drag)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,6 +64,7 @@
             this.textBox_content.Name = "textBox_content";
             this.textBox_content.Size = new System.Drawing.Size(290, 290);
             this.textBox_content.TabIndex = 0;
+            this.textBox_content.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox_content_KeyUp);
             // 
             // pBox_add
             // 
@@ -85,20 +86,21 @@
             this.pBox_remove.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBox_remove.TabIndex = 1;
             this.pBox_remove.TabStop = false;
-            this.pBox_remove.Click += new System.EventHandler(this.Close_Click);
+            this.pBox_remove.Click += new System.EventHandler(this.Remove_Click);
             this.pBox_remove.MouseEnter += new System.EventHandler(this.PictureBox_Enter);
             this.pBox_remove.MouseLeave += new System.EventHandler(this.PictureBox_Leave);
             // 
-            // pBox_settings
+            // pBox_close
             // 
-            this.pBox_settings.Location = new System.Drawing.Point(270, -6);
-            this.pBox_settings.Name = "pBox_settings";
-            this.pBox_settings.Size = new System.Drawing.Size(30, 30);
-            this.pBox_settings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pBox_settings.TabIndex = 2;
-            this.pBox_settings.TabStop = false;
-            this.pBox_settings.MouseEnter += new System.EventHandler(this.PictureBox_Enter);
-            this.pBox_settings.MouseLeave += new System.EventHandler(this.PictureBox_Leave);
+            this.pBox_close.Location = new System.Drawing.Point(270, -6);
+            this.pBox_close.Name = "pBox_close";
+            this.pBox_close.Size = new System.Drawing.Size(30, 30);
+            this.pBox_close.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pBox_close.TabIndex = 2;
+            this.pBox_close.TabStop = false;
+            this.pBox_close.Click += new System.EventHandler(this.Close_Click);
+            this.pBox_close.MouseEnter += new System.EventHandler(this.PictureBox_Enter);
+            this.pBox_close.MouseLeave += new System.EventHandler(this.PictureBox_Leave);
             // 
             // label_title
             // 
@@ -130,7 +132,7 @@
             this.ClientSize = new System.Drawing.Size(300, 330);
             this.Controls.Add(this.pBox_drag);
             this.Controls.Add(this.label_title);
-            this.Controls.Add(this.pBox_settings);
+            this.Controls.Add(this.pBox_close);
             this.Controls.Add(this.pBox_remove);
             this.Controls.Add(this.pBox_add);
             this.Controls.Add(this.panel_main);
@@ -145,7 +147,7 @@
             this.panel_main.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_add)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_remove)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pBox_settings)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBox_close)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBox_drag)).EndInit();
             this.ResumeLayout(false);
 
@@ -156,7 +158,7 @@
         private System.Windows.Forms.Panel panel_main;
         private System.Windows.Forms.PictureBox pBox_add;
         private System.Windows.Forms.PictureBox pBox_remove;
-        private System.Windows.Forms.PictureBox pBox_settings;
+        private System.Windows.Forms.PictureBox pBox_close;
         private System.Windows.Forms.Label label_title;
         private System.Windows.Forms.TextBox textBox_content;
         private System.Windows.Forms.PictureBox pBox_drag;

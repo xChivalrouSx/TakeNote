@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TakeNote.Classes;
@@ -14,11 +15,6 @@ namespace TakeNote
 {
     public partial class Note : Form
     {
-        public Note()
-        {
-            InitializeComponent();
-        }
-
 
         #region [ - Constant Fields - ]
 
@@ -26,10 +22,12 @@ namespace TakeNote
 
         private static readonly Bitmap IMAGE_ADD_BUTTON = new Bitmap(CURRENT_DIRECTORY + "/../../Icons/Black/Add.png");
         private static readonly Bitmap IMAGE_REMOVE_BUTTON = new Bitmap(CURRENT_DIRECTORY + "/../../Icons/Black/Remove.png");
-        private static readonly Bitmap IMAGE_SETTINGS_BUTTON = new Bitmap(CURRENT_DIRECTORY + "/../../Icons/Black/Settings.png");
+        private static readonly Bitmap IMAGE_CLOSE_BUTTON = new Bitmap(CURRENT_DIRECTORY + "/../../Icons/Black/Close.png");
         private static readonly Bitmap IMAGE_DRAG_BUTTON = new Bitmap(CURRENT_DIRECTORY + "/../../Icons/Black/Drag.png");
 
         private static readonly Size DEFAULT_BUTTON_SIZE = new Size(30, 30);
+
+        private static readonly string DEFAULT_TITLE = "- Take Note -";
 
         #endregion
 
@@ -39,10 +37,30 @@ namespace TakeNote
         public int Id { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
+        public int IsVisible { get; set; }
 
-        private DBHelper _db;
+        private DBHelper _db = new DBHelper();
         private bool _draggable = false;
         private Point _lastLocation;
+
+        #endregion
+
+
+        #region [ - Public Methods - ]
+
+        public Note()
+        {
+            InitializeComponent();
+
+            setProperties(_db.Insert(DEFAULT_TITLE, string.Empty), DEFAULT_TITLE, string.Empty, 1);
+        }
+
+        public Note(int id, string title, string content, int isVisible)
+        {
+            InitializeComponent();
+
+            setProperties(id, title, content, isVisible);
+        }
 
         #endregion
 
@@ -53,12 +71,6 @@ namespace TakeNote
         {
             SetMainDesign();
 
-            _db = new DBHelper();
-
-            label_title.Text = Title = "- Take Note -";
-            textBox_content.Text = Content = "";
-            Id = _db.Insert(Title, Content); ;
-
             NoteManager.AddNote(this);
         }
 
@@ -68,9 +80,18 @@ namespace TakeNote
             note.Show();
         }
 
-        private void Close_Click(object sender, EventArgs e)
+        private void Remove_Click(object sender, EventArgs e)
         {
             NoteManager.RemoveNote(this);
+
+            this.Close();
+            this.Dispose();
+        }
+
+        private void Close_Click(object sender, EventArgs e)
+        {
+            IsVisible = 0;
+            _db.Changevisibility(this.Id, 0);
 
             this.Close();
             this.Dispose();
@@ -111,18 +132,40 @@ namespace TakeNote
             }
         }
 
+        private void textBox_content_KeyUp(object sender, KeyEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            Content = textBox.Text;
+
+            // Background thread for update database
+            new Thread(() =>
+            {
+                Thread.CurrentThread.IsBackground = true;
+
+                _db.Update(Id, Title, Content, IsVisible);
+            }).Start();
+        }
+
         #endregion
 
 
         #region [ - Private Methods - ]
 
+        private void setProperties(int id, string title, string content, int isVisible)
+        {
+            Id = id;
+            label_title.Text = Title = title;
+            textBox_content.Text = Content = content;
+            this.IsVisible = isVisible;
+        }
+
         private void SetMainDesign()
         {
-            pBox_remove.Image = IMAGE_REMOVE_BUTTON;
-            LocateButtonsX(pBox_remove, 1);
+            pBox_close.Image = IMAGE_CLOSE_BUTTON;
+            LocateButtonsX(pBox_close, 1);
 
-            pBox_settings.Image = IMAGE_SETTINGS_BUTTON;
-            LocateButtonsX(pBox_settings, 2);
+            pBox_remove.Image = IMAGE_REMOVE_BUTTON;
+            LocateButtonsX(pBox_remove, 2);
 
             pBox_add.Image = IMAGE_ADD_BUTTON;
             LocateButtonsX(pBox_add, 3);
