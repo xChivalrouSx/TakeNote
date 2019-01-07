@@ -26,6 +26,8 @@ namespace TakeNote
         private static readonly Bitmap IMAGE_DRAG_BUTTON = new Bitmap(CURRENT_DIRECTORY + "/../../Icons/Black/Drag.png");
 
         private static readonly Size DEFAULT_BUTTON_SIZE = new Size(30, 30);
+        private static readonly int SCREEN_WIDTH = Screen.PrimaryScreen.Bounds.Width;
+        private static readonly int SCREEN_HEIGHT = Screen.PrimaryScreen.Bounds.Height;
 
         private static readonly string DEFAULT_TITLE = "- Take Note -";
 
@@ -52,14 +54,17 @@ namespace TakeNote
         {
             InitializeComponent();
 
-            setProperties(_db.Insert(DEFAULT_TITLE, string.Empty), DEFAULT_TITLE, string.Empty, 1);
+            int x = SCREEN_WIDTH - this.Width;
+            int y = 0;
+
+            setProperties(_db.Insert(DEFAULT_TITLE, string.Empty, x, y), DEFAULT_TITLE, string.Empty, 1, x, y);
         }
 
-        public Note(int id, string title, string content, int isVisible)
+        public Note(int id, string title, string content, int isVisible, int locationX, int locationY)
         {
             InitializeComponent();
 
-            setProperties(id, title, content, isVisible);
+            setProperties(id, title, content, isVisible, locationX, locationY);
         }
 
         #endregion
@@ -78,6 +83,8 @@ namespace TakeNote
         {
             textBox_content.SelectionStart = textBox_content.Text.Length;
             textBox_content.SelectionLength = 0;
+
+            Location = _db.GetLocation(Id);
         }
 
         private void Add_Click(object sender, EventArgs e)
@@ -97,7 +104,7 @@ namespace TakeNote
         private void Close_Click(object sender, EventArgs e)
         {
             IsVisible = 0;
-            _db.Changevisibility(this.Id, 0);
+            _db.ChangeVisibility(this.Id, 0);
 
             this.Close();
             this.Dispose();
@@ -124,6 +131,7 @@ namespace TakeNote
         private void Drag_MouseUp(object sender, MouseEventArgs e)
         {
             _draggable = false;
+            _db.ChangeLocation(Id, Location.X, Location.Y);
         }
 
         private void Drag_MouseMove(object sender, MouseEventArgs e)
@@ -157,12 +165,13 @@ namespace TakeNote
 
         #region [ - Private Methods - ]
 
-        private void setProperties(int id, string title, string content, int isVisible)
+        private void setProperties(int id, string title, string content, int isVisible, int locationX, int locationY)
         {
             Id = id;
             label_title.Text = Title = title;
             textBox_content.Text = Content = content;
             this.IsVisible = isVisible;
+            this.Location = new Point(locationX, locationY);
         }
 
         private void SetMainDesign()
