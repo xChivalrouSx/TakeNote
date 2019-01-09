@@ -16,24 +16,6 @@ namespace TakeNote
     public partial class Note : Form
     {
 
-        #region [ - Constant Fields - ]
-
-        private static readonly string CURRENT_DIRECTORY = Directory.GetCurrentDirectory();
-
-        private static readonly Bitmap IMAGE_ADD_BUTTON = new Bitmap(CURRENT_DIRECTORY + "/../../Icons/Black/Add.png");
-        private static readonly Bitmap IMAGE_REMOVE_BUTTON = new Bitmap(CURRENT_DIRECTORY + "/../../Icons/Black/Remove.png");
-        private static readonly Bitmap IMAGE_CLOSE_BUTTON = new Bitmap(CURRENT_DIRECTORY + "/../../Icons/Black/Close.png");
-        private static readonly Bitmap IMAGE_DRAG_BUTTON = new Bitmap(CURRENT_DIRECTORY + "/../../Icons/Black/Drag.png");
-
-        private static readonly Size DEFAULT_BUTTON_SIZE = new Size(30, 30);
-        private static readonly int SCREEN_WIDTH = Screen.PrimaryScreen.Bounds.Width;
-        private static readonly int SCREEN_HEIGHT = Screen.PrimaryScreen.Bounds.Height;
-
-        private static readonly string DEFAULT_TITLE = "- Take Note -";
-
-        #endregion
-
-
         #region [ - Fields - ]
 
         public int Id { get; set; }
@@ -54,10 +36,10 @@ namespace TakeNote
         {
             InitializeComponent();
 
-            int x = SCREEN_WIDTH - this.Width;
+            int x = Common.SCREEN_WIDTH - this.Width;
             int y = 0;
 
-            setProperties(_db.Insert(DEFAULT_TITLE, string.Empty, x, y), DEFAULT_TITLE, string.Empty, 1, x, y);
+            setProperties(_db.Insert(Common.DEFAULT_NOTE_TITLE, string.Empty, x, y), Common.DEFAULT_NOTE_TITLE, string.Empty, 1, x, y);
         }
 
         public Note(int id, string title, string content, int isVisible, int locationX, int locationY)
@@ -176,26 +158,27 @@ namespace TakeNote
 
         private void SetMainDesign()
         {
-            pBox_close.Image = IMAGE_CLOSE_BUTTON;
-            LocateButtonsX(pBox_close, 1);
+            pBox_close.Size = Common.DEFAULT_BUTTON_SIZE;
+            pBox_close.Image = Common.IMAGE_CLOSE_BUTTON;
+            Common.LocateButtonsX(pBox_close, 1);
 
-            pBox_remove.Image = IMAGE_REMOVE_BUTTON;
-            LocateButtonsX(pBox_remove, 2);
+            pBox_remove.Size = Common.DEFAULT_BUTTON_SIZE;
+            pBox_remove.Image = Common.IMAGE_REMOVE_BUTTON;
+            Common.LocateButtonsX(pBox_remove, 2);
 
-            pBox_add.Image = IMAGE_ADD_BUTTON;
-            LocateButtonsX(pBox_add, 3);
+            pBox_add.Size = Common.DEFAULT_BUTTON_SIZE;
+            pBox_add.Image = Common.IMAGE_ADD_BUTTON;
+            Common.LocateButtonsX(pBox_add, 3);
 
-            pBox_drag.Image = IMAGE_DRAG_BUTTON;
+            pBox_drag.Size = Common.DEFAULT_BUTTON_SIZE;
+            pBox_drag.Image = Common.IMAGE_DRAG_BUTTON;
             pBox_drag.Location = new Point(0, 0);
 
-            label_title.Location = new Point(DEFAULT_BUTTON_SIZE.Width, 0);
-            label_title.Size = new Size(this.Width - DEFAULT_BUTTON_SIZE.Width * 4, 30);
+            label_title.Location = new Point(Common.DEFAULT_BUTTON_SIZE.Width, 0);
+            label_title.Size = new Size(this.Width - Common.DEFAULT_BUTTON_SIZE.Width * 4, 30);
         }
 
-        private void LocateButtonsX(PictureBox pBox, int numberFromRight)
-        {
-            pBox.Location = new Point(this.Width - (DEFAULT_BUTTON_SIZE.Width * numberFromRight), 0);
-        }
+        
 
         #endregion
 

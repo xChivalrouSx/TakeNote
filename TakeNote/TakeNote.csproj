@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Common.cs" />
     <Compile Include="Classes\DBHelper.cs" />
     <Compile Include="Note.cs">
       <SubType>Form</SubType>
@@ -113,6 +114,7 @@
     <Content Include="Icons\Black\Close.png" />
     <Content Include="Icons\Black\Drag.png" />
     <Content Include="Icons\Black\Add.png" />
+    <Content Include="Icons\Black\Minimize.png" />
     <Content Include="Icons\Black\Remove.png" />
     <Content Include="Icons\Black\Settings.png" />
     <Content Include="Icons\Note.ico" />
