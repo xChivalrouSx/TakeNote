@@ -104,32 +104,6 @@ namespace TakeNote
             pictureBox.BackColor = Color.Transparent;
         }
 
-        private void Drag_MouseDown(object sender, MouseEventArgs e)
-        {
-            _draggable = true;
-            _lastLocation = e.Location;
-        }
-
-        private void Drag_MouseUp(object sender, MouseEventArgs e)
-        {
-            _draggable = false;
-            _db.ChangeLocation(Id, Location.X, Location.Y);
-        }
-
-        private void Drag_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (_draggable)
-            {
-                this.Location = new Point(
-                    (this.Location.X - _lastLocation.X) + e.X, 
-                    (this.Location.Y - _lastLocation.Y) + e.Y);
-
-                Common.CatchEdges(this);
-
-                this.Update();
-            }
-        }
-
         private void textBox_content_KeyUp(object sender, KeyEventArgs e)
         {
             TextBox textBox = sender as TextBox;
@@ -156,6 +130,10 @@ namespace TakeNote
             textBox_content.Text = Content = content;
             this.IsVisible = isVisible;
             this.Location = new Point(locationX, locationY);
+
+            pBox_drag.MouseDown += Common.Drag_MouseDown;
+            pBox_drag.MouseUp += Common.Drag_MouseUp;
+            pBox_drag.MouseMove += Common.Drag_MouseMove;
         }
 
         private void SetMainDesign()

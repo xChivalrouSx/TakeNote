@@ -35,6 +35,10 @@ namespace TakeNote.Classes
         public static readonly Color COLOR_HEAD_DEFAULT = Color.FromArgb(239, 83, 80);
         public static readonly Color COLOR_LEFT_MENU_DEFAULT = Color.FromArgb(225, 226, 225);
 
+        private static DBHelper _db = new DBHelper();
+        private static bool _draggable = false;
+        private static Point _lastLocation;
+
         #endregion
 
         #region [ - Methods - ]
@@ -42,6 +46,45 @@ namespace TakeNote.Classes
         public static void LocateButtonsX(PictureBox pBox, int numberFromRight)
         {
             pBox.Location = new Point(pBox.Parent.Width - (Common.DEFAULT_BUTTON_SIZE.Width * numberFromRight), 0);
+        }
+
+        public static void Drag_MouseDown(object sender, MouseEventArgs e)
+        {
+            _draggable = true;
+            _lastLocation = e.Location;
+        }
+
+        public static void Drag_MouseUp(object sender, MouseEventArgs e)
+        {
+            Control control = sender as Control;
+            Form form = control.FindForm();
+
+            _draggable = false;
+
+            if (form is Note)
+            {
+                Note note = form as Note;
+                _db.ChangeLocation(note.Id, note.Location.X, note.Location.Y);
+            }
+
+            
+        }
+
+        public static void Drag_MouseMove(object sender, MouseEventArgs e)
+        {
+            Control control = sender as Control;
+            Form form = control.FindForm();
+
+            if (_draggable)
+            {
+                form.Location = new Point(
+                    (form.Location.X - _lastLocation.X) + e.X,
+                    (form.Location.Y - _lastLocation.Y) + e.Y);
+
+                Common.CatchEdges(form);
+
+                control.Update();
+            }
         }
 
         public static void CatchEdges(Control control)

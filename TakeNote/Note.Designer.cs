@@ -120,9 +120,6 @@
             this.pBox_drag.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBox_drag.TabIndex = 4;
             this.pBox_drag.TabStop = false;
-            this.pBox_drag.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Drag_MouseDown);
-            this.pBox_drag.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Drag_MouseMove);
-            this.pBox_drag.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Drag_MouseUp);
             // 
             // Note
             // 
