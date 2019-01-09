@@ -108,6 +108,10 @@ namespace TakeNote
             label_title.Location = new Point(0, 0);
             label_title.Size = new Size(this.Width - Common.DEFAULT_BUTTON_SIZE.Width, 30);
             label_title.Text = Common.APPLICATION_NAME;
+
+            label_title.MouseDown += Common.Drag_MouseDown;
+            label_title.MouseUp += Common.Drag_MouseUp;
+            label_title.MouseMove += Common.Drag_MouseMove;
         }
 
         private void init()

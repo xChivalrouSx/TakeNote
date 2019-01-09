@@ -81,8 +81,11 @@ namespace TakeNote.Classes
                     (form.Location.X - _lastLocation.X) + e.X,
                     (form.Location.Y - _lastLocation.Y) + e.Y);
 
-                Common.CatchEdges(form);
-
+                if (form is Note)
+                {
+                    Common.CatchEdges(form);
+                }
+                
                 control.Update();
             }
         }
