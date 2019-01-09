@@ -44,6 +44,32 @@ namespace TakeNote.Classes
             pBox.Location = new Point(pBox.Parent.Width - (Common.DEFAULT_BUTTON_SIZE.Width * numberFromRight), 0);
         }
 
+        public static void CatchEdges(Control control)
+        {   // Catch for X axis
+            if (control.Location.X < 11)
+            {
+                control.Location = new Point(0, control.Location.Y);
+            }
+
+            int xLocationForRightEdge = (Common.SCREEN_WIDTH - control.Width);
+            if (control.Location.X > xLocationForRightEdge - 11)
+            {
+                control.Location = new Point(xLocationForRightEdge, control.Location.Y);
+            }
+
+            // Catch for Y axis
+            if (control.Location.Y < 11)
+            {
+                control.Location = new Point(control.Location.X, 0);
+            }
+
+            int yLocationForBottomEdge = (Common.SCREEN_HEIGHT - control.Height);
+            if (control.Location.Y > yLocationForBottomEdge - 11)
+            {
+                control.Location = new Point(control.Location.X, yLocationForBottomEdge);
+            }
+        }
+
         #endregion
 
     }

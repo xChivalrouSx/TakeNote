@@ -124,6 +124,8 @@ namespace TakeNote
                     (this.Location.X - _lastLocation.X) + e.X, 
                     (this.Location.Y - _lastLocation.Y) + e.Y);
 
+                Common.CatchEdges(this);
+
                 this.Update();
             }
         }
