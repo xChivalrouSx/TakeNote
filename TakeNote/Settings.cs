@@ -77,6 +77,26 @@ namespace TakeNote
             this.Hide();
         }
 
+        private void SettingsButton_MouseEnter(object sender, EventArgs e)
+        {
+            (sender as Label).BackColor = Common.COLOR_LEFT_MENU_BUTTON_HOVER;
+        }
+
+        private void SettingsButton_MouseLeave(object sender, EventArgs e)
+        {
+            (sender as Label).BackColor = Common.COLOR_LEFT_MENU_BUTTON_DEFAULT;
+        }
+
+        private void SettingsButton_Click(object sender, EventArgs e)
+        {
+            Label label = sender as Label;
+
+            if (label.Name.Equals(Common.LABEL_NOTES_NAME))
+            {
+
+            }
+        }
+
         #endregion
 
 
@@ -99,6 +119,10 @@ namespace TakeNote
             panel_leftMenu.Size = new Size(200, this.Height - panel_head.Height);
             panel_leftMenu.BackColor = Common.COLOR_LEFT_MENU_DEFAULT;
 
+            panel_body.Location = new Point(panel_leftMenu.Width, panel_head.Height);
+            panel_body.Size = new Size(this.Width - panel_leftMenu.Width, this.Height - panel_head.Height);
+            panel_body.Padding = new Padding(10, 10, 10, 10);
+
             // Set System Buttons
             pBox_close.Size = Common.DEFAULT_BUTTON_SIZE;
             pBox_close.Image = Common.IMAGE_CLOSE_BUTTON;
@@ -112,7 +136,30 @@ namespace TakeNote
             label_title.MouseDown += Common.Drag_MouseDown;
             label_title.MouseUp += Common.Drag_MouseUp;
             label_title.MouseMove += Common.Drag_MouseMove;
+
+            SetLeftMenuContent();
         }
+
+        private void SetLeftMenuContent()
+        {
+            Label label_notes = new Label();
+            label_notes.Name = Common.LABEL_NOTES_NAME;
+            label_notes.AutoSize = false;
+            label_notes.Width = panel_leftMenu.Width;
+            label_notes.Height = Common.LEFT_MENU_BUTTON_HEIGHT;
+            label_notes.TextAlign = ContentAlignment.MiddleCenter;
+            label_notes.Text = "Notes";
+            label_notes.Location = new Point(0, 0);
+            label_notes.BackColor = Common.COLOR_LEFT_MENU_BUTTON_DEFAULT;
+
+            label_notes.MouseEnter += SettingsButton_MouseEnter;
+            label_notes.MouseLeave += SettingsButton_MouseLeave;
+            label_notes.Click += SettingsButton_Click;
+
+            panel_leftMenu.Controls.Add(label_notes);
+        }
+
+        
 
         private void init()
         {
