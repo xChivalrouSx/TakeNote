@@ -1,5 +1,5 @@
 # TakeNote
-###An application to take note easily
+### An application to take note easily
 ---
 The application allows:
 * Create notes
