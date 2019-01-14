@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TakeNote.Classes;
+using TakeNote.Panels;
 
 namespace TakeNote
 {
@@ -49,6 +50,18 @@ namespace TakeNote
             setUI();
 
             init();
+        }
+
+        public void UpdateContent(Panel panel)
+        {
+            if (panel is NotesControl)
+            {
+                panel_body.Controls.Remove(panel);
+
+                NotesControl noteControl = new NotesControl(_db.GetNotes(), panel_body);
+
+                panel_body.Controls.Add(noteControl);
+            }
         }
 
         #endregion
@@ -93,7 +106,9 @@ namespace TakeNote
 
             if (label.Name.Equals(Common.LABEL_NOTES_NAME))
             {
+                NotesControl noteControl = new NotesControl(_db.GetNotes(), panel_body);
 
+                panel_body.Controls.Add(noteControl);
             }
         }
 
@@ -142,13 +157,18 @@ namespace TakeNote
 
         private void SetLeftMenuContent()
         {
+            AddNewContent(Common.LABEL_NOTES_NAME, Common.LABEL_NOTES_TITLE);
+        }
+
+        private void AddNewContent(string name, string title)
+        {
             Label label_notes = new Label();
-            label_notes.Name = Common.LABEL_NOTES_NAME;
+            label_notes.Name = name;
             label_notes.AutoSize = false;
             label_notes.Width = panel_leftMenu.Width;
             label_notes.Height = Common.LEFT_MENU_BUTTON_HEIGHT;
             label_notes.TextAlign = ContentAlignment.MiddleCenter;
-            label_notes.Text = "Notes";
+            label_notes.Text = title;
             label_notes.Location = new Point(0, 0);
             label_notes.BackColor = Common.COLOR_LEFT_MENU_BUTTON_DEFAULT;
 
@@ -158,8 +178,6 @@ namespace TakeNote
 
             panel_leftMenu.Controls.Add(label_notes);
         }
-
-        
 
         private void init()
         {

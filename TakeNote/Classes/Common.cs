@@ -30,14 +30,26 @@ namespace TakeNote.Classes
         public static readonly string DEFAULT_NOTE_TITLE = "- Take Note -";
         public static readonly string APPLICATION_NAME = "Take Note";
 
+        public static readonly string MAKE_HIDDEN = "Hide";
+        public static readonly string MAKE_VISIBLE = "Show";
+        public static readonly string REMOVE = "Remove";
+
         public static readonly string LABEL_NOTES_NAME = "label_notes";
+        public static readonly string LABEL_NOTES_TITLE = "Notes";
+
+        public static readonly int HEIGHT_SETTINGS_NOTE_PANEL = 50;
+        public static readonly int MARGIN_DEFAULT = 10;
+        public static readonly string PANEL_NAME_START = "pnl";
+        public static readonly string NAME_SEPERATOR = "_";
 
 
         public static readonly int SETTINGS_PANEL_HEAD_HEIGHT = 30;
         public static readonly Color COLOR_HEAD_DEFAULT = Color.FromArgb(239, 83, 80);
+        public static readonly Color COLOR_BOLD_DEFAULT = Color.FromArgb(182, 24, 39);
         public static readonly Color COLOR_LEFT_MENU_DEFAULT = Color.FromArgb(225, 226, 225);
         public static readonly Color COLOR_LEFT_MENU_BUTTON_DEFAULT = Color.FromArgb(200, 200, 200);
         public static readonly Color COLOR_LEFT_MENU_BUTTON_HOVER = Color.FromArgb(180, 180, 180);
+        public static readonly Color NOTE_BACK_COLOR = Color.FromArgb(249, 249, 149);
 
         private static DBHelper _db = new DBHelper();
         private static bool _draggable = false;
