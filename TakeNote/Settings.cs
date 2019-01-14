@@ -131,10 +131,10 @@ namespace TakeNote
 
             // Set head and menu Containers
             panel_head.Location = new Point(0, 0);
-            panel_head.Size = new Size(this.Width, Common.SETTINGS_PANEL_HEAD_HEIGHT);
+            panel_head.Size = new Size(this.Width, Common.HEIGHT_SETTINGS_PANEL_HEAD);
             panel_head.BackColor = Common.COLOR_HEAD_DEFAULT;
 
-            panel_leftMenu.Location = new Point(0, Common.SETTINGS_PANEL_HEAD_HEIGHT);
+            panel_leftMenu.Location = new Point(0, Common.HEIGHT_SETTINGS_PANEL_HEAD);
             panel_leftMenu.Size = new Size(200, this.Height - panel_head.Height);
             panel_leftMenu.BackColor = Common.COLOR_LEFT_MENU_DEFAULT;
 
@@ -143,13 +143,13 @@ namespace TakeNote
             panel_body.Padding = new Padding(10, 10, 10, 10);
 
             // Set System Buttons
-            pBox_close.Size = Common.DEFAULT_BUTTON_SIZE;
+            pBox_close.Size = Common.SIZE_DEFAULT_BUTTON;
             pBox_close.Image = Common.IMAGE_CLOSE_BUTTON;
             Common.LocateButtonsX(pBox_close, 1);
 
             // Set Title lable
             label_title.Location = new Point(0, 0);
-            label_title.Size = new Size(this.Width - Common.DEFAULT_BUTTON_SIZE.Width, 30);
+            label_title.Size = new Size(this.Width - Common.SIZE_DEFAULT_BUTTON.Width, 30);
             label_title.Text = Common.APPLICATION_NAME;
 
             label_title.MouseDown += Common.Drag_MouseDown;
@@ -170,7 +170,7 @@ namespace TakeNote
             label_notes.Name = name;
             label_notes.AutoSize = false;
             label_notes.Width = panel_leftMenu.Width;
-            label_notes.Height = Common.LEFT_MENU_BUTTON_HEIGHT;
+            label_notes.Height = Common.HEIGHT_LEFT_MENU_BUTTON;
             label_notes.TextAlign = ContentAlignment.MiddleCenter;
             label_notes.Text = title;
             label_notes.Location = new Point(0, 0);
@@ -210,9 +210,9 @@ namespace TakeNote
         private void CreateContextMenu()
         {
             ContextMenu menu = new ContextMenu();
-            menu.MenuItems.Add("Create Note", MenuCreate_Click);
-            menu.MenuItems.Add("Settings", MenuShow_Click);
-            menu.MenuItems.Add("Close", MenuClose_Click);
+            menu.MenuItems.Add(Common.NOTIFICATION_CREATE_NOTE, MenuCreate_Click);
+            menu.MenuItems.Add(Common.NOTIFICATION_SETTINGS, MenuShow_Click);
+            menu.MenuItems.Add(Common.NOTIFICATION_CLOSE, MenuClose_Click);
 
             notifyIcon.ContextMenu = menu;
         }

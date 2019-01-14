@@ -22,7 +22,7 @@ namespace TakeNote.Panels
         #region [ - Public Methods - ]
 
         public NotesControl(List<Note> notes, Panel parentPanel)
-        {
+        {   // Set Panel
             this.Width = parentPanel.Width - (Common.MARGIN_DEFAULT * 2);
             this.Height = parentPanel.Height - (Common.MARGIN_DEFAULT * 2);
             this.Location = new Point(Common.MARGIN_DEFAULT, Common.MARGIN_DEFAULT);
@@ -141,7 +141,7 @@ namespace TakeNote.Panels
             label.Location = new Point(Common.MARGIN_DEFAULT, Common.MARGIN_DEFAULT);
             label.TextAlign = ContentAlignment.MiddleCenter;
             label.BorderStyle = BorderStyle.FixedSingle;
-            label.Text = note.Title + "\r\n" + note.Content.Replace("\r\n"," ");
+            label.Text = note.Title + Common.STRING_NEW_LINE + note.Content.Replace(Common.STRING_NEW_LINE, Common.STRING_SPACE);
 
             panel.Controls.Add(label);
 

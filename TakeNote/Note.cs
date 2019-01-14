@@ -24,8 +24,6 @@ namespace TakeNote
         public int IsVisible { get; set; }
 
         private DBHelper _db = new DBHelper();
-        private bool _draggable = false;
-        private Point _lastLocation;
 
         #endregion
 
@@ -36,7 +34,7 @@ namespace TakeNote
         {
             InitializeComponent();
 
-            int x = Common.SCREEN_WIDTH - this.Width;
+            int x = Common.WIDTH_SCREEN - this.Width;
             int y = 0;
 
             setProperties(_db.Insert(Common.DEFAULT_NOTE_TITLE, string.Empty, x, y), Common.DEFAULT_NOTE_TITLE, string.Empty, 1, x, y);
@@ -138,30 +136,29 @@ namespace TakeNote
 
         private void SetMainDesign()
         {
-            pBox_close.Size = Common.DEFAULT_BUTTON_SIZE;
+            pBox_close.Size = Common.SIZE_DEFAULT_BUTTON;
             pBox_close.Image = Common.IMAGE_CLOSE_BUTTON;
             Common.LocateButtonsX(pBox_close, 1);
 
-            pBox_remove.Size = Common.DEFAULT_BUTTON_SIZE;
+            pBox_remove.Size = Common.SIZE_DEFAULT_BUTTON;
             pBox_remove.Image = Common.IMAGE_REMOVE_BUTTON;
             Common.LocateButtonsX(pBox_remove, 2);
 
-            pBox_add.Size = Common.DEFAULT_BUTTON_SIZE;
+            pBox_add.Size = Common.SIZE_DEFAULT_BUTTON;
             pBox_add.Image = Common.IMAGE_ADD_BUTTON;
             Common.LocateButtonsX(pBox_add, 3);
 
-            pBox_drag.Size = Common.DEFAULT_BUTTON_SIZE;
+            pBox_drag.Size = Common.SIZE_DEFAULT_BUTTON;
             pBox_drag.Image = Common.IMAGE_DRAG_BUTTON;
             pBox_drag.Location = new Point(0, 0);
 
-            label_title.Location = new Point(Common.DEFAULT_BUTTON_SIZE.Width, 0);
-            label_title.Size = new Size(this.Width - Common.DEFAULT_BUTTON_SIZE.Width * 4, 30);
+            label_title.Location = new Point(Common.SIZE_DEFAULT_BUTTON.Width, 0);
+            label_title.Size = new Size(this.Width - Common.SIZE_DEFAULT_BUTTON.Width * 4, 30);
         }
 
         
 
         #endregion
 
-        
     }
 }
