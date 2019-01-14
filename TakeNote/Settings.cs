@@ -52,11 +52,11 @@ namespace TakeNote
             init();
         }
 
-        public void UpdateContent(Panel panel)
+        public void UpdateContent(string name)
         {
-            if (panel is NotesControl)
+            if (name.Equals(Common.LABEL_NOTES_NAME))
             {
-                panel_body.Controls.Remove(panel);
+                panel_body.Controls.Clear();
 
                 NotesControl noteControl = new NotesControl(_db.GetNotes(), panel_body);
 
@@ -72,6 +72,12 @@ namespace TakeNote
         private void Settings_Shown(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void MenuCreate_Click(object sender, EventArgs e)
+        {
+            Note note = new Note();
+            note.Show();
         }
 
         private void MenuShow_Click(object sender, EventArgs e)
@@ -106,9 +112,7 @@ namespace TakeNote
 
             if (label.Name.Equals(Common.LABEL_NOTES_NAME))
             {
-                NotesControl noteControl = new NotesControl(_db.GetNotes(), panel_body);
-
-                panel_body.Controls.Add(noteControl);
+                UpdateContent(Common.LABEL_NOTES_NAME);
             }
         }
 
@@ -206,6 +210,7 @@ namespace TakeNote
         private void CreateContextMenu()
         {
             ContextMenu menu = new ContextMenu();
+            menu.MenuItems.Add("Create Note", MenuCreate_Click);
             menu.MenuItems.Add("Settings", MenuShow_Click);
             menu.MenuItems.Add("Close", MenuClose_Click);
 

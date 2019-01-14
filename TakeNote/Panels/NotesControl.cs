@@ -95,7 +95,7 @@ namespace TakeNote.Panels
             }
 
             NoteManager.RemoveNote(note);
-            (FindForm() as Settings).UpdateContent(this);
+            (FindForm() as Settings).UpdateContent(Common.LABEL_NOTES_NAME);
         }
 
         private void Hover_Enter(object sender, EventArgs e)
