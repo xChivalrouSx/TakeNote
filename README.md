@@ -9,6 +9,6 @@ The application allows:
 ### Images
 
 <p float="left">
-  <img src="./app-images/take-note-00.png" alt="Image - 1" width="250"/> 
-  <img src="./app-images/take-note-01.png" alt="Image - 2" width="750"/>
+  <img src="./app-images/take-note-00.png" alt="Image - 1" height="300"/> 
+  <img src="./app-images/take-note-01.png" alt="Image - 2" height="300"/>
 </p>
